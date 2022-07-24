@@ -6,6 +6,6 @@ export const getRate = async (req, res) => {
         res.send(data);
     }
     catch {
-        res.status(400).send();
+        res.status(400).send({ "error": "Error receiving data" });
     }
 }
