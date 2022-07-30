@@ -1,7 +1,7 @@
 {
   "name": "bitcoin-price",
   "version": "1.0.0",
-  "description": "",
+  "description": "Current exchange rate of Bitcoin (BTC) to UAH",
   "main": "index.js",
   "type": "module",
   "scripts": {
