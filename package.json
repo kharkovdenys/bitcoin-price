@@ -8,8 +8,8 @@
     "dev": "nodemon index"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Denys Kharkov",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",
