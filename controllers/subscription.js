@@ -1,5 +1,5 @@
-import fs from "fs";
-import nodemailer from "nodemailer";
+import fs from "fs/promises";
+import { createTransport } from "nodemailer";
 
 import { getPrice } from "../helpers/third-party-service.js"
 
@@ -14,38 +14,30 @@ export const addEmail = async (req, res) => {
         res.status(400).send({ "error": "This is not an email" });
         return;
     }
-    fs.readFile("./emails.txt", 'utf8', function (err, data) {
-        if (err) {
-            res.status(400).send({ "error": "Error reading emails" });
-            return;
-        }
+    try {
+        const data = await fs.readFile("./emails.txt", 'utf8');
         if (data.split("\n").includes(email)) {
             res.status(409).send({ "error": "This email already exists" });
             return;
         }
-        fs.appendFile("./emails.txt", email + '\n', function (err) {
-            if (err) {
-                res.status(400).send({ "error": "Email is not added to the list" });
-                return;
-            }
-            res.send({});
-        })
-    });
+        await fs.appendFile("./emails.txt", email + '\n');
+        res.send({});
+    }
+    catch {
+        res.status(400).send({ "error": "Email is not added to the list" });
+    }
 }
 
-export const sendEmails = async (req, res) => {
-    fs.readFile("./emails.txt", 'utf8', async function (err, data) {
-        if (err) {
-            res.status(400).send({ "error": "Error reading emails" });
-            return;
-        }
+export const sendEmails = async (_req, res) => {
+    try {
+        const data = await fs.readFile("./emails.txt", 'utf8');
         const emails = data.split("\n");
         emails.pop();
         if (!emails.length) {
             res.status(400).send({ "error": "Emails list is empty" });
             return;
         }
-        var transporter = nodemailer.createTransport({
+        var transporter = createTransport({
             service: "Outlook365",
             auth: {
                 user: 'bitcoin.price@outlook.com',
@@ -58,12 +50,10 @@ export const sendEmails = async (req, res) => {
             subject: "The current rate",
             text: "UAH: " + (await getPrice()).uah.toString()
         }
-        transporter.sendMail(mailOptions, (err, info) => {
-            if (err) {
-                res.status(400).send({ "error": "Emails fail to send" });
-                return;
-            }
-            res.send({});
-        })
-    });
+        await transporter.sendMail(mailOptions);
+        res.send({});
+    }
+    catch {
+        res.status(400).send({ "error": "Emails fail to send" });
+    }
 }

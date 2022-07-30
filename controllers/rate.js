@@ -1,6 +1,6 @@
 import { getPrice } from "../helpers/third-party-service.js"
 
-export const getRate = async (req, res) => {
+export const getRate = async (_req, res) => {
     try {
         const data = await getPrice();
         res.send(data);
