@@ -2,12 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
+import 'dotenv/config'
 
 import rateRoutes from "./routes/rate.js";
 import subscriptionRoutes from "./routes/subscription.js";
 
 const app = express();
-const PORT = 3000;
 
 app.use(helmet());
 
@@ -19,6 +19,6 @@ app.use(cors());
 app.use("/api", rateRoutes);
 app.use("/api", subscriptionRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Started server on http://localhost:${PORT}/api`);
+app.listen(process.env.PORT, () => {
+    console.log(`Started server on http://${process.env.HOST}:${process.env.PORT}/api`);
 });

@@ -1,6 +1,7 @@
 import axios from "axios";
+import 'dotenv/config'
 
 export const getPrice = async () => {
-    const { data } = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=uah");
+    const { data } = await axios.get(process.env.API);
     return data.bitcoin;
 }

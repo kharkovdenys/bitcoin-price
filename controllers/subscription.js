@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import { createTransport } from "nodemailer";
+import 'dotenv/config'
 
 import { getPrice } from "../helpers/third-party-service.js"
 
@@ -38,14 +39,14 @@ export const sendEmails = async (_req, res) => {
             return;
         }
         var transporter = createTransport({
-            service: "Outlook365",
+            service: process.env.SERVICE,
             auth: {
-                user: 'bitcoin.price@outlook.com',
-                pass: 'pm?rBi?aUXB*b6z'
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
             }
         });
         const mailOptions = {
-            from: 'bitcoin.price@outlook.com',
+            from: process.env.EMAIL,
             to: emails,
             subject: "The current rate",
             text: "UAH: " + (await getPrice()).uah.toString()
