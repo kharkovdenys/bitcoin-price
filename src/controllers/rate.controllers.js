@@ -1,9 +1,8 @@
-import { getPrice } from "../helpers/third-party-service.js"
+import { getBTCRate } from "../services/getBTCRate.service.js";
 
 export const getRate = async (_req, res) => {
     try {
-        const data = await getPrice();
-        res.send(data);
+        res.send({ uah: await getBTCRate() });
     }
     catch {
         res.status(400).send({ "error": "Error receiving data" });

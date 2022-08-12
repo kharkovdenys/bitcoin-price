@@ -2,10 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
-import 'dotenv/config'
+import 'dotenv/config';
 
-import rateRoutes from "./routes/rate.js";
-import subscriptionRoutes from "./routes/subscription.js";
+import rateRoutes from "./src/routes/rate.routes.js";
+import subscriptionRoutes from "./src/routes/subscription.routes.js";
 
 const app = express();
 
