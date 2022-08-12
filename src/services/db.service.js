@@ -65,4 +65,4 @@ class db {
 
 }
 
-export default db = new db;
+export default new db;

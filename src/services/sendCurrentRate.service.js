@@ -21,4 +21,4 @@ export const sendCurrentRate = async () => {
         text: "UAH: " + await getBTCRate()
     };
     await transporter.sendMail(mailOptions);
-}
+};

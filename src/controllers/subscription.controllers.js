@@ -16,11 +16,10 @@ export const addEmail = async (req, res) => {
         }
         await db.add(email);
         res.send({});
-    }
-    catch {
+    } catch {
         res.status(400).send({ "error": "Email is not added to the list" });
     }
-}
+};
 
 export const sendEmails = async (_req, res) => {
     try {
@@ -30,8 +29,7 @@ export const sendEmails = async (_req, res) => {
         }
         await sendCurrentRate();
         res.send({});
-    }
-    catch {
+    } catch {
         res.status(400).send({ "error": "Emails fail to send" });
     }
-}
+};

@@ -1,6 +1,7 @@
 .dockerignore
 .git
 .gitignore
+.eslintrc.cjs
 node_modules
 test
 Dockerfile

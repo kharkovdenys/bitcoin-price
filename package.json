@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index"
+    "start": "node index",
+    "dev": "nodemon index",
+    "lint": "eslint --fix",
+    "lint:check": "eslint ."
   },
   "keywords": [],
   "author": "Denys Kharkov",
@@ -19,6 +22,7 @@
     "nodemailer": "^6.7.7"
   },
   "devDependencies": {
+    "eslint": "^8.21.0",
     "nodemon": "^2.0.19"
   }
 }
