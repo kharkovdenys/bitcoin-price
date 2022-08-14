@@ -21,7 +21,31 @@ cd bitcoin-price
 npm install
 ```
 
-## Steps for read-only access
+## Setting .env
+
+```bash
+...
+SERVICE=                #email service
+EMAIL=                  #email for sending letters
+PASSWORD=               #email password
+EMAILTEST=              #gmail email for tests
+...
+```
+
+[Supported services](https://nodemailer.com/smtp/well-known/)
+
+[Setting up the gmail tester](https://github.com/levz0r/gmail-tester#usage)
+
+## Running Tests
+
+To run the test suite, first install the dependencies, then run npm test:
+
+```bash
+npm install
+npm test
+```
+
+## Start the application
 
 To start the express server, run the following
 

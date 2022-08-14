@@ -1,4 +1,3 @@
-import db from "../services/db.service.js";
 import { createTransport } from "nodemailer";
 import 'dotenv/config';
 
@@ -13,10 +12,10 @@ const transporter = createTransport({
     }
 });
 
-export const sendCurrentRate = async () => {
+export const sendCurrentRate = async (emails) => {
     const mailOptions = {
         from: process.env.EMAIL,
-        to: db.getAll(),
+        to: emails,
         subject: "The current rate",
         text: "UAH: " + await getBTCRate()
     };

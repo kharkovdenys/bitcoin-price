@@ -4,6 +4,7 @@
 .eslintrc.cjs
 node_modules
 test
+jest.config.js
 Dockerfile
 LICENSE
 README.md

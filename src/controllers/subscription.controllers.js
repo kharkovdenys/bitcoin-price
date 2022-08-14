@@ -27,7 +27,7 @@ export const sendEmails = async (_req, res) => {
             res.status(400).send({ "error": "Emails list is empty" });
             return;
         }
-        await sendCurrentRate();
+        await sendCurrentRate(db.getAll());
         res.send({});
     } catch {
         res.status(400).send({ "error": "Emails fail to send" });

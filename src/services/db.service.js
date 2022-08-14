@@ -1,15 +1,25 @@
 import fs from "fs/promises";
 import 'dotenv/config';
 
-const path = process.env.PATHDB;
 const options = 'utf8';
 
 class db {
 
     #emails;
+    #path = process.env.PATHDB;
 
-    constructor() {
-        fs.readFile(path, options)
+    constructor(path) {
+        if (path) {
+            this.#path = path;
+        } else {
+            fs.readFile(this.#path, options)
+                .then((emails) => this.deserialization(emails))
+                .catch(() => this.clean());
+        }
+    }
+
+    async customInit() {
+        await fs.readFile(this.#path, options)
             .then((emails) => this.deserialization(emails))
             .catch(() => this.clean());
     }
@@ -29,7 +39,7 @@ class db {
 
     async add(email) {
         this.#emails.push(email);
-        await fs.appendFile(path, email + "\n");
+        await fs.appendFile(this.#path, email + "\n");
     }
 
     async delete(email) {
@@ -48,7 +58,7 @@ class db {
     }
 
     async save(data) {
-        await fs.writeFile(path, data, options);
+        await fs.writeFile(this.#path, data, options);
     }
 
     isEmpty() {
@@ -65,4 +75,5 @@ class db {
 
 }
 
+export const dbCustom = db;
 export default new db;
